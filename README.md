@@ -23,7 +23,7 @@ The results presented in the paper were obtained by running [avalanche/explore_a
 `python -u explore_avalanche.py --base_cost 1.0 --scaling_factor 9 --avalanche_iter 25 --adoption_threshold 1.1 --wd res_dir`.
 
 The meaning of the parameters is defined in the script itself as well as Sections III-A and V-C of the paper.
-To run the simple greedy algorithm presented in Section III, please specify `--greedy 1`. The set of circuits used for exploration can be changed by modifying lines 60 and 61 of the script and adding the .blif files of the circuits to [avalanche/benchmarks](https://github.com/EPFL-LAP/fpl21-avalanche/edit/master/avalanche/) directory.
+To run the simple greedy algorithm presented in Section III, please specify `--greedy 1`. The set of circuits used for exploration can be changed by modifying lines 60 and 61 of the script and adding the .blif files of the circuits to [avalanche/benchmarks](https://github.com/EPFL-LAP/fpl21-avalanche/edit/master/avalanche/benchmarks/) directory.
 
 
 ## Contact
