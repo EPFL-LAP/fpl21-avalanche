@@ -18,7 +18,7 @@ Please follow the instructions from [EPFL-LAP/fpga21-scaled-tech](https://github
 ## Running the Flow
 
 Scripts that are part of the exploration flow can be found in the [avalanche/](https://github.com/EPFL-LAP/fpl21-avalanche/edit/master/avalanche/) directory.
-The results presented in the paper were obtained by the running [avalanche/explore_avalanche.py](https://github.com/EPFL-LAP/fpl21-avalanche/edit/master/avalanche/explore_avalanche.py) with the following parameters:
+The results presented in the paper were obtained by running [avalanche/explore_avalanche.py](https://github.com/EPFL-LAP/fpl21-avalanche/edit/master/avalanche/explore_avalanche.py) with the following parameters:
 
 `python -u explore_avalanche.py --base_cost 1.0 --scaling_factor 9 --avalanche_iter 25 --adoption_threshold 1.1 --wd res_dir`.
 
