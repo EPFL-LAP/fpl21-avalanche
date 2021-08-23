@@ -1,0 +1,17 @@
+[library]
+name=lib
+latch=dff 1 1
+gate=lut6 6 1
+gate=lut5 5 1
+gate=lut4 4 1
+gate=lut3 3 1
+gate=lut2 2 1
+[circuit]
+name=synth_p0.70_size10000_seed75796
+libraries=lib
+distribution=7000 3500 2500 1700 700 1600
+size=14500
+  p=0.70
+size=17000
+  I=50
+  O=50

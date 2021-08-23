@@ -1,0 +1,4 @@
+The channel composition of this architecture was set to mimic that of Agilex [Chromczak2020], apart from the H12 and the V8 wires which are likely routed at Mz layers,
+not modeled by our FPGA'21 flow. Other than that, the architecture has little in common with Agilex and is much closer to K6_N10_40nm.xml, shipped with VPR.
+This includes monolithic local interconnect, kept for easier packing, even though at 4nm it is not an optimal design choice. This will be rectified once the local
+interconnect is explored as well.

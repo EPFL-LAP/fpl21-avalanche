@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+<architecture>
+
+    <models>
+    </models>
+
+    <layout>
+        <fixed_layout name="fix" width="23" height="12">
+            <perimeter type="io" priority="100"/>
+            <corners type="EMPTY" priority="101"/>
+            <fill type="clb" priority="10"/>
+        </fixed_layout>
+    </layout>
+
+    <device>
+        <sizing R_minW_nmos="8926" R_minW_pmos="16067"/>
+        <area grid_logic_tile_area="0"/>
+        <chan_width_distr>
+            <x distr="uniform" peak="1.000000"/>
+            <y distr="uniform" peak="1.000000"/>
+        </chan_width_distr>
+        <switch_block type="wilton" fs="3"/>
+        <connection_block input_switch_name="cb"/>
+    </device>
+
+    <switchlist>
+        <switch type="mux" name="H1" R="0" Cin="0" Cout="0" Tdel="1.795e-11" mux_trans_size="0" buf_size="0"/>
+        <switch type="mux" name="H2" R="0" Cin="0" Cout="0" Tdel="2.27625e-11" mux_trans_size="0" buf_size="0"/>
+        <switch type="mux" name="H4" R="0" Cin="0" Cout="0" Tdel="3.28875e-11" mux_trans_size="0" buf_size="0"/>
+        <switch type="mux" name="H6" R="0" Cin="0" Cout="0" Tdel="4.68875e-11" mux_trans_size="0" buf_size="0"/>
+        <switch type="mux" name="V1_tap_0" R="0" Cin="0" Cout="0" Tdel="2.455e-11" mux_trans_size="0" buf_size="0"/>
+        <switch type="mux" name="V4_tap_0" R="0" Cin="0" Cout="0" Tdel="7.63062e-11" mux_trans_size="0" buf_size="0"/>
+        <switch type="mux" name="cb" R="0" Cin="0" Cout="0" Tdel="3.29954e-11" mux_trans_size="0" buf_size="0"/>
+    </switchlist>
+
+    <segmentlist>
+        <segment freq="1.0" length="1" type="unidir" Rmetal="0" Cmetal="0" name="H1">
+            <mux name="H1"/>
+            <sb type="pattern">1 1</sb>
+            <cb type="pattern">1</cb>
+        </segment>
+        <segment freq="1.0" length="2" type="unidir" Rmetal="0" Cmetal="0" name="H2">
+            <mux name="H2"/>
+            <sb type="pattern">1 0 1</sb>
+            <cb type="pattern">1 1</cb>
+        </segment>
+        <segment freq="1.0" length="4" type="unidir" Rmetal="0" Cmetal="0" name="H4">
+            <mux name="H4"/>
+            <sb type="pattern">1 0 0 0 1</sb>
+            <cb type="pattern">1 0 0 1</cb>
+        </segment>
+        <segment freq="1.0" length="6" type="unidir" Rmetal="0" Cmetal="0" name="H6">
+            <mux name="H6"/>
+            <sb type="pattern">1 0 0 0 0 0 1</sb>
+            <cb type="pattern">1 0 0 0 0 1</cb>
+        </segment>
+        <segment freq="1.0" length="1" type="unidir" Rmetal="0" Cmetal="0" name="V1_tap_0">
+            <mux name="V1_tap_0"/>
+            <sb type="pattern">1 1</sb>
+            <cb type="pattern">1</cb>
+        </segment>
+        <segment freq="1.0" length="4" type="unidir" Rmetal="0" Cmetal="0" name="V4_tap_0">
+            <mux name="V4_tap_0"/>
+            <sb type="pattern">1 0 0 0 1</sb>
+            <cb type="pattern">1 0 0 1</cb>
+        </segment>
+    </segmentlist>
+
+    <complexblocklist>
+        <pb_type name="io" capacity="8" area="0">
+            <input name="outpad" num_pins="1"/>
+            <output name="inpad" num_pins="1"/>
+            <clock name="clock" num_pins="1"/>
+            <mode name="inpad">
+                <pb_type name="inpad" blif_model=".input" num_pb="1">
+                    <output name="inpad" num_pins="1"/>
+                </pb_type>
+                <interconnect>
+                    <direct name="inpad" input="inpad.inpad" output="io.inpad">
+                        <delay_constant max="0" in_port="inpad.inpad" out_port="io.inpad"/>
+                    </direct>
+                </interconnect>
+            </mode>
+            <mode name="outpad">
+                <pb_type name="outpad" blif_model=".output" num_pb="1">
+                    <input name="outpad" num_pins="1"/>
+                </pb_type>
+                <interconnect>
+                    <direct name="outpad" input="io.outpad" output="outpad.outpad">
+                        <delay_constant max="0" in_port="io.outpad" out_port="outpad.outpad"/>
+                    </direct>
+                </interconnect>
+            </mode>
+            <fc in_type="frac" in_val="0.15" out_type="frac" out_val="0.10"/>
+            <pinlocations pattern="custom">
+                <loc side="left">io.outpad io.inpad io.clock</loc>
+            </pinlocations>
+            <power method="ignore"/>
+        </pb_type>
+
+        <pb_type name="clb" area="0">
+            <input name="I" num_pins="32" equivalent="full"/>
+            <output name="O" num_pins="8" equivalent="full"/>
+            <clock name="clk" num_pins="1"/>
+            <pb_type name="ble" num_pb="8">
+                <input name="in" num_pins="6"/>
+                <output name="out" num_pins="1"/>
+                <clock name="clk" num_pins="1"/>
+                <pb_type name="lut" blif_model=".names" num_pb="1" class="lut">
+                    <input name="in" num_pins="6" port_class="lut_in"/>
+                    <output name="out" num_pins="1" port_class="lut_out"/>
+                    <delay_matrix type="max" in_port="lut.in" out_port="lut.out">
+                        6.4e-11
+                        6.4e-11
+                        6.4e-11
+                        6.4e-11
+                        6.4e-11
+                        6.4e-11
+                    </delay_matrix>
+                </pb_type>
+                <pb_type name="ff" blif_model=".latch" num_pb="1" class="flipflop">
+                    <input name="D" num_pins="1" port_class="D"/>
+                    <output name="Q" num_pins="1" port_class="Q"/>
+                    <clock name="clk" num_pins="1" port_class="clock"/>
+                    <T_setup value="1.6e-11" port="ff.D" clock="clk"/>
+                    <T_clock_to_Q max="3e-11" port="ff.Q" clock="clk"/>
+                </pb_type>
+                <interconnect>
+                    <direct name="direct1" input="ble.in" output="lut[0:0].in"/>
+                    <direct name="direct2" input="lut.out" output="ff.D">
+                        <pack_pattern name="ble6" in_port="lut.out" out_port="ff.D"/>
+                    </direct>
+                    <direct name="direct3" input="ble.clk" output="ff.clk"/>
+                    <mux name="ble_mux1" input="ff.Q lut.out" output="ble.out[0]">
+                        <delay_constant max="4.2e-12" in_port="lut.out" out_port="ble.out"/>
+                        <delay_constant max="4.2e-12" in_port="ff.Q" out_port="ble.out"/>
+                    </mux>
+                </interconnect>
+            </pb_type>
+            <interconnect>
+                <complete name="crossbar" input="clb.I ble[7:0].out" output="ble[7:0].in">
+                    <delay_constant max="0" in_port="clb.I" out_port="ble[7:0].in"/>
+                    <delay_constant max="3.632e-11" in_port="ble[7:0].out" out_port="ble[7:0].in"/>
+                </complete>
+                <complete name="clks" input="clb.clk" output="ble[7:0].clk"/>
+                <direct name="clbouts1" input="ble[7:0].out" output="clb.O">
+                    <delay_constant max="1.575e-11" in_port="ble[7:0].out" out_port="clb.O"/>
+                </direct>
+            </interconnect>
+            <fc in_type="frac" in_val="0.15" out_type="frac" out_val="0.10"/>
+            <pinlocations pattern="custom">
+                <loc side="left">clb.I clb.O clb.clk</loc>
+            </pinlocations>
+        </pb_type>
+    </complexblocklist>
+    <power>
+        <local_interconnect C_wire="2.5e-10"/>
+        <mux_transistor_size mux_transistor_size="3"/>
+        <FF_size FF_size="4"/>
+        <LUT_transistor_size LUT_transistor_size="4"/>
+    </power>
+    <clocks>
+        <clock buffer_size="auto" C_wire="2.5e-10"/>
+    </clocks>
+</architecture>
